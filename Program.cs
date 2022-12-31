@@ -1,10 +1,13 @@
-﻿// Задача 58: Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.
-// Например, даны 2 матрицы:
-// 2 4 | 3 4
-// 3 2 | 3 3
-// Результирующая матрица будет:
-// 18 20
-// 15 18
+﻿// Задача 54: Задайте двумерный массив. Напишите программу, которая упорядочит по убыванию 
+// элементы каждой строки двумерного массива.
+// Например, задан массив:
+// 1 4 7 2
+// 5 9 2 3
+// 8 4 2 4
+// В итоге получается вот такой массив:
+// 7 4 2 1
+// 9 5 3 2
+// 8 4 4 2
 
 void PrintMatrix(int [,] InputMatrix)
 {
@@ -18,34 +21,49 @@ void PrintMatrix(int [,] InputMatrix)
     }
 }
 
-int [,] ProductOfMatrices (int [,] FirstMatrix, int [,] SecondMatrix)
+void FillArray (int [,] InputArray)
 {
-    int [,] ResultMatrix = new int [FirstMatrix.GetLength(0), FirstMatrix.GetLength(1)];
-    for (int i = 0; i < ResultMatrix.GetLength(0); i++)
+    for (int i = 0; i < InputArray.GetLength(0); i++)
     {
-        for (int j = 0; j < ResultMatrix.GetLength(1); j++)
+        for (int j = 0; j < InputArray.GetLength(1); j++)
         {
-            for (int k = 0; k < ResultMatrix.GetLength(0); k++)
+            InputArray[i,j] = new Random().Next(1,10);
+        }
+    }
+}
+
+void OrganizeArray (int [,] InputArray)
+{
+    int temp = 0;
+    for (int i = 0; i < InputArray.GetLength(0); i++)
+    {
+        for (int j = 0; j < InputArray.GetLength(1); j++)
+        {
+            for (int k = 0; k < InputArray.GetLength(1); k++)
             {
-                ResultMatrix[i,j] += (FirstMatrix[i,k] * SecondMatrix[k,j]) ;
+                if (InputArray[i,j] > InputArray[i,k])
+                {
+                    temp = InputArray[i,j];
+                    InputArray[i,j] = InputArray[i,k];
+                    InputArray[i,k] = temp;
+                }
             }
         }
     }
-    return ResultMatrix; 
 }
 
-int [,] matrix1 = new int [,] {{2,4},{3,2}};
-int [,] matrix2 = new int [,] {{3,4},{3,3}};
-System.Console.WriteLine("Первая матрица: ");
-PrintMatrix(matrix1);
+System.Console.WriteLine("Введите количество столбцов: ");
+int rows = Convert.ToInt32(Console.ReadLine());
+System.Console.WriteLine("Введите количество строк: ");
+int columns = Convert.ToInt32(Console.ReadLine());
+int [,] array = new int [rows,columns];
+System.Console.WriteLine("Исходный двумерный массив: ");
+FillArray(array);
+PrintMatrix(array);
+System.Console.WriteLine("Упорядоченный двумерный массив: ");
+OrganizeArray(array);
+PrintMatrix(array);
 
-System.Console.WriteLine("Вторая матрица: ");
-PrintMatrix(matrix2);
-System.Console.WriteLine();
-
-System.Console.WriteLine("Результирующая матрица: ");
-int [,] resMatr = ProductOfMatrices(matrix1,matrix2);
-PrintMatrix(resMatr);
 
 
 
