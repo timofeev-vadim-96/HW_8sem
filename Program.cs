@@ -30,7 +30,7 @@ int [,] GetMatrix(int m, int n)
 void ArrangeStrokes (int [,] array)
 {
     int [] array2 = new int [array.GetLength(0)];
-    int min = array2[0];
+    int min = int.MaxValue;
     int minIndex = 0;
     for (int i = 0; i < array.GetLength(0); i++)
     {
@@ -38,17 +38,13 @@ void ArrangeStrokes (int [,] array)
         {
             array2[i] = array2[i] + array[i,j];
         }
-    }
-    for (int m = 0; m < array2.Length; m++)
-    {
-        if (min>array2[m])
+        if (min>array2[i])
         {
-            min = array2[m];
-            minIndex = m;
-        } 
-    }
-    System.Console.WriteLine(array2);
-    System.Console.WriteLine($"номер строки с наименьшей суммой элементов: {minIndex} строка");
+            min = array2[i];
+            minIndex = i;
+        }
+    } 
+    System.Console.WriteLine($"номер строки с наименьшей суммой элементов: {minIndex+1} строка");
 }
 void PrintMatrix(int [,] InputMatrix)
 {
