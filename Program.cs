@@ -1,51 +1,51 @@
-﻿// Задача 58: Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.
-// Например, даны 2 матрицы:
-// 2 4 | 3 4
-// 3 2 | 3 3
-// Результирующая матрица будет:
-// 18 20
-// 15 18
+﻿// Задача 60. ...Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. 
+// Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.
+// Массив размером 2 x 2 x 2
+// 66(0,0,0) 25(0,1,0)
+// 34(1,0,0) 41(1,1,0)
+// 27(0,0,1) 90(0,1,1)
+// 26(1,0,1) 55(1,1,1)
 
-void PrintMatrix(int [,] InputMatrix)
+void PrintMatrix(int [,,] InputMatrix)
 {
     for (int i = 0; i < InputMatrix.GetLength(0); i++)
     {
         for (int j = 0; j < InputMatrix.GetLength(1); j++)
         {
-            System.Console.Write(InputMatrix[i,j] + "\t");
-        }    
+            for (int k = 0; k < InputMatrix.GetLength(2); k++)
+            {
+                System.Console.Write($"{InputMatrix[i,j,k]}({i},{j},{k}) ");
+            }
+        } 
         System.Console.WriteLine();    
     }
 }
 
-int [,] ProductOfMatrices (int [,] FirstMatrix, int [,] SecondMatrix)
+
+int [,,] matrix = new int [2,2,2];
+
+int [,,] Fill3dMatrix (int [,,] matrix3d)
 {
-    int [,] ResultMatrix = new int [FirstMatrix.GetLength(0), FirstMatrix.GetLength(1)];
-    for (int i = 0; i < ResultMatrix.GetLength(0); i++)
+    for (int i = 0; i < matrix3d.GetLength(0); i++)
     {
-        for (int j = 0; j < ResultMatrix.GetLength(1); j++)
+        for (int j = 0; j < matrix3d.GetLength(1); j++)
         {
-            for (int k = 0; k < ResultMatrix.GetLength(0); k++)
-            {
-                ResultMatrix[i,j] += (FirstMatrix[i,k] * SecondMatrix[k,j]) ;
-            }
+           for (int k = 0; k < matrix3d.GetLength(2); k++)
+           {
+                matrix3d[i,j,k] = new Random().Next(1,10);
+           } 
         }
     }
-    return ResultMatrix; 
+    return matrix3d;
 }
-
-int [,] matrix1 = new int [,] {{2,4},{3,2}};
-int [,] matrix2 = new int [,] {{3,4},{3,3}};
-System.Console.WriteLine("Первая матрица: ");
-PrintMatrix(matrix1);
-
-System.Console.WriteLine("Вторая матрица: ");
-PrintMatrix(matrix2);
+System.Console.WriteLine();
+System.Console.WriteLine("Трехмерная матрица: ");
+int [,,] resultMatrix = Fill3dMatrix(matrix);
+PrintMatrix(resultMatrix);
 System.Console.WriteLine();
 
-System.Console.WriteLine("Результирующая матрица: ");
-int [,] resMatr = ProductOfMatrices(matrix1,matrix2);
-PrintMatrix(resMatr);
+
+
 
 
 
