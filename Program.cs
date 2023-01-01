@@ -56,7 +56,7 @@ void Abrakadabra (int [,,] array)// метод для замены одинак�
                     {
                         for (int n = 0; n < array.GetLength(2); n++)
                         {
-                            if (i==l && j== m && k==n) break;
+                            if (i==l && j== m && k==n) continue;
                             else if (temp == array [l,m,n]) 
                             {
                             array[l,m,n] = new Random().Next(10,18);
