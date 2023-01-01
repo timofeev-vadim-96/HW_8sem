@@ -43,12 +43,3 @@ System.Console.WriteLine("Трехмерная матрица: ");
 int [,,] resultMatrix = Fill3dMatrix(matrix);
 PrintMatrix(resultMatrix);
 System.Console.WriteLine();
-
-
-
-
-
-
-
-
-
