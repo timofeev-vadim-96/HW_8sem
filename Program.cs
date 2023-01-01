@@ -32,7 +32,7 @@ int [,,] Fill3dMatrix (int [,,] matrix3d)
         {
            for (int k = 0; k < matrix3d.GetLength(2); k++)
            {
-                matrix3d[i,j,k] = new Random().Next(1,10);
+                matrix3d[i,j,k] = new Random().Next(10,100);
            } 
         }
     }
