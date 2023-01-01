@@ -1,4 +1,7 @@
-﻿// Задача 60. ...Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. 
+﻿// Сломал себе мозг по сравнению всех элементов трехмерного массива, но сделал. В данной программе вы 
+// гарантированно получите неповторяющиеся элементы двухзначных чисел (использована рекурсия)
+
+// Задача 60. ...Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. 
 // Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.
 // Массив размером 2 x 2 x 2
 // 66(0,0,0) 25(0,1,0)
@@ -32,14 +35,46 @@ int [,,] Fill3dMatrix (int [,,] matrix3d)
         {
            for (int k = 0; k < matrix3d.GetLength(2); k++)
            {
-                matrix3d[i,j,k] = new Random().Next(10,100);
+                matrix3d[i,j,k] = new Random().Next(10,18);
            } 
         }
     }
     return matrix3d;
 }
+void Abrakadabra (int [,,] array)// метод для замены одинаковых элементов чисел.
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            for (int k = 0; k < array.GetLength(2); k++)
+            {
+                int temp = array [i,j,k];//берем по одному значению из массива для сравнения
+                for (int l = 0; l < array.GetLength(0); l++)
+                {
+                    for (int m = 0; m < array.GetLength(1); m++)
+                    {
+                        for (int n = 0; n < array.GetLength(2); n++)
+                        {
+                            if (i==l && j== m && k==n) break;
+                            else if (temp == array [l,m,n]) 
+                            {
+                            array[l,m,n] = new Random().Next(10,18);
+                            Abrakadabra (array);//На случай, если новое число будет = одному из тех, которые уже имеются
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+} 
 System.Console.WriteLine();
-System.Console.WriteLine("Трехмерная матрица: ");
+System.Console.WriteLine("Базовая трехмерная матрица: ");
 int [,,] resultMatrix = Fill3dMatrix(matrix);
+PrintMatrix(resultMatrix);
+Abrakadabra(resultMatrix);
+System.Console.WriteLine();
+System.Console.WriteLine("Трехмерная матрица c неповторяющимися двузначными числами: ");
 PrintMatrix(resultMatrix);
 System.Console.WriteLine();
